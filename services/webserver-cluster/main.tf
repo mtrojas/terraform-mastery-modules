@@ -48,7 +48,7 @@ resource "aws_autoscaling_group" "asg-servers" {
 resource "aws_autoscaling_schedule" "scale_out_during_business_hours" {
   count = var.enable_autoscaling ? 1 : 0
 
-  scheduled_action_name = "${var.cluster-name}-scale-out-during-business-hours"
+  scheduled_action_name = "${var.cluster_name}-scale-out-during-business-hours"
   min_size              = 2
   max_size              = 10
   desired_capacity      = 10
@@ -60,7 +60,7 @@ resource "aws_autoscaling_schedule" "scale_out_during_business_hours" {
 resource "aws_autoscaling_schedule" "scale_in_at_night" {
   count = var.enable_autoscaling ? 1 : 0
 
-  scheduled_action_name = "${var.cluster-name}-scale-in-at-night"
+  scheduled_action_name = "${var.cluster_name}-scale-in-at-night"
   min_size              = 2
   max_size              = 10
   desired_capacity      = 2
