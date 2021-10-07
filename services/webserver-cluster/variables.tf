@@ -10,7 +10,8 @@ variable "cluster_name" {
 }
 
 variable "ami" {
-  description = "The image to use for creating the instances"
+  description = "The AMI to run in the cluster"
+  default     = "ami-0c55b159cbfafe1f0"
   type        = string
 }
 
@@ -50,7 +51,8 @@ variable "enable_autoscaling" {
   type        = bool
 }
 
-variable "enable_new_user_data" {
-  description = "If set to true, use the new User Data script"
-  type        = bool
+variable "server_text" {
+  description = "The text the web server should return"
+  default     = "Hello, World! from an input variable"
+  type        = string
 }
