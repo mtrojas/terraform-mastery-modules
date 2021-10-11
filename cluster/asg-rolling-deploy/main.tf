@@ -1,3 +1,8 @@
+locals {
+  tcp_protocol = "tcp"
+  all_ips      = ["0.0.0.0/0"]
+}
+
 resource "aws_launch_configuration" "servers" {
   image_id        = var.ami
   instance_type   = var.instance_type
