@@ -6,8 +6,10 @@ terraform {
 resource "aws_lb" "alb-servers" {
   name               = var.alb_name
   load_balancer_type = "application"
-  subnets            = data.aws_subnet_ids.default.ids
-  security_groups    = [aws_security_group.sg-alb.id]
+
+  subnets = var.subnet_ids
+
+  security_groups = [aws_security_group.sg-alb.id]
 }
 
 resource "aws_lb_listener" "http" {
@@ -51,4 +53,13 @@ resource "aws_security_group_rule" "allow_all_outbound" {
   to_port     = local.any_port
   protocol    = local.any_protocol
   cidr_blocks = local.all_ips
+}
+
+locals {
+  http_port     = 80
+  any_port      = 0
+  any_protocol  = "-1"
+  tcp_protocol  = "tcp"
+  http_protocol = "HTTP"
+  all_ips       = ["0.0.0.0/0"]
 }
