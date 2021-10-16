@@ -1,4 +1,7 @@
 terraform {
+  # Require Terraform at exactly version 1.0.9
+  required_version = "= 1.0.9"
+
   backend "s3" {
     key = "modules/examples/asg/terraform.tfstate"
   }
@@ -6,12 +9,16 @@ terraform {
 
 provider "aws" {
   region = "us-east-2"
+
+  # Allow any 3.x version of the AWS provider
+  version = "~> 3.0"
 }
 
 module "asg" {
   source = "../../cluster/asg-rolling-deploy"
 
-  cluster_name  = var.cluster_name
+  cluster_name = var.cluster_name
+
   ami           = "ami-0c55b159cbfafe1f0"
   instance_type = "t2.micro"
 
