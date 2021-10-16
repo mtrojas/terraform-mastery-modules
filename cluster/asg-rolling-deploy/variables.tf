@@ -1,3 +1,8 @@
+# ---------------------------------------------------------------------------------------------------------------------
+# REQUIRED PARAMETERS
+# You must provide a value for each of these parameters.
+# ---------------------------------------------------------------------------------------------------------------------
+
 variable "cluster_name" {
   description = "The name to use for all the cluster resources"
   type        = string
@@ -24,27 +29,20 @@ variable "max_size" {
   type        = number
 }
 
+variable "subnet_ids" {
+  description = "The subnet IDs to deploy to"
+  type        = list(string)
+}
+
 variable "enable_autoscaling" {
   description = "If set to true, enable auto scaling"
   type        = bool
 }
 
-variable "custom_tags" {
-  description = "Custom tags to set on the Instances in the ASG"
-  type        = map(string)
-  default     = {}
-}
-
-variable "server_port" {
-  description = "The port the server will use for HTTP requests"
-  type        = number
-  default     = 8080
-}
-
-variable "subnet_ids" {
-  description = "The subnet IDs to deploy to"
-  type        = list(string)
-}
+# ---------------------------------------------------------------------------------------------------------------------
+# OPTIONAL PARAMETERS
+# These parameters have reasonable defaults.
+# ---------------------------------------------------------------------------------------------------------------------
 
 variable "target_group_arns" {
   description = "The ARNs of ELB target groups in which to register Instances"
@@ -62,4 +60,16 @@ variable "user_data" {
   description = "The User Data script to run in each Instance at boot"
   type        = string
   default     = null
+}
+
+variable "custom_tags" {
+  description = "Custom tags to set on the Instances in the ASG"
+  type        = map(string)
+  default     = {}
+}
+
+variable "server_port" {
+  description = "The port the server will use for HTTP requests"
+  type        = number
+  default     = 8080
 }
