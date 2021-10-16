@@ -1,3 +1,8 @@
+# ---------------------------------------------------------------------------------------------------------------------
+# REQUIRED PARAMETERS
+# You must provide a value for each of these parameters.
+# ---------------------------------------------------------------------------------------------------------------------
+
 variable "alb_name" {
   description = "The name to use for this ALB"
   type        = string
