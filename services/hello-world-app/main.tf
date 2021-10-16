@@ -40,7 +40,7 @@ data "template_file" "user_data" {
   }
 }
 
-resource "aws_lb_target_group" "tg-servers" {
+resource "aws_lb_target_group" "tg_servers" {
   name     = "hello-world-${var.environment}"
   port     = var.server_port
   protocol = local.http_protocol
@@ -57,7 +57,7 @@ resource "aws_lb_target_group" "tg-servers" {
   }
 }
 
-resource "aws_lb_listener_rule" "alb-listener-rule" {
+resource "aws_lb_listener_rule" "alb_listener_rule" {
   listener_arn = module.alb.alb_http_listener_arn
   priority     = 100
 
@@ -69,7 +69,7 @@ resource "aws_lb_listener_rule" "alb-listener-rule" {
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.tg-servers.arn
+    target_group_arn = aws_lb_target_group.tg_servers.arn
   }
 }
 
