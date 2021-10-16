@@ -3,15 +3,6 @@ terraform {
   required_version = "= 1.0.9"
 }
 
-locals {
-  http_port     = 80
-  any_port      = 0
-  any_protocol  = "-1"
-  tcp_protocol  = "tcp"
-  http_protocol = "HTTP"
-  all_ips       = ["0.0.0.0/0"]
-}
-
 module "asg" {
   source = "../../cluster/asg-rolling-deploy"
 
@@ -98,6 +89,10 @@ data "aws_vpc" "default" {
 
 data "aws_subnet_ids" "default" {
   vpc_id = data.aws_vpc.default.id
+}
+
+locals {
+  http_protocol = "HTTP"
 }
 
 
