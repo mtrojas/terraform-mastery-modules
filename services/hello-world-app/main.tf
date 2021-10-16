@@ -1,3 +1,8 @@
+terraform {
+  # Require Terraform at exactly version 1.0.9
+  required_version = "= 1.0.9"
+}
+
 locals {
   http_port     = 80
   any_port      = 0

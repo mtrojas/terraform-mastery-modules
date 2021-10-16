@@ -1,3 +1,8 @@
+terraform {
+  # Require Terraform at exactly version 1.0.9
+  required_version = "= 1.0.9"
+}
+
 resource "aws_db_instance" "db" {
   identifier_prefix = "${var.cluster_name}-db-servers"
   engine            = "mysql"

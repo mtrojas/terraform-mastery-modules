@@ -1,3 +1,8 @@
+terraform {
+  # Require Terraform at exactly version 1.0.9
+  required_version = "= 1.0.9"
+}
+
 resource "aws_lb" "alb-servers" {
   name               = var.alb_name
   load_balancer_type = "application"

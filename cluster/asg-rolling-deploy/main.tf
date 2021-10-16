@@ -1,3 +1,8 @@
+terraform {
+  # Require Terraform at exactly version 1.0.9
+  required_version = "= 1.0.9"
+}
+
 locals {
   tcp_protocol = "tcp"
   all_ips      = ["0.0.0.0/0"]
