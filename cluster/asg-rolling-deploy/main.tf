@@ -3,17 +3,11 @@ terraform {
   required_version = "= 1.0.9"
 }
 
-locals {
-  tcp_protocol = "tcp"
-  all_ips      = ["0.0.0.0/0"]
-}
-
 resource "aws_launch_configuration" "servers" {
   image_id        = var.ami
   instance_type   = var.instance_type
   security_groups = [aws_security_group.sg.id]
-
-  user_data = var.user_data
+  user_data       = var.user_data
 
   # Required when using a launch configuration with an auto scaling group
   # https://www.terraform.io/docs/providers/aws/r/launch_configuration.html
@@ -27,7 +21,8 @@ resource "aws_autoscaling_group" "asg-servers" {
   name = "${var.cluster_name}-${aws_launch_configuration.servers.name}"
 
   launch_configuration = aws_launch_configuration.servers.name
-  vpc_zone_identifier  = var.subnet_ids
+
+  vpc_zone_identifier = var.subnet_ids
 
   # Configure integrations with a load balancer
   target_group_arns = var.target_group_arns
@@ -68,24 +63,22 @@ resource "aws_autoscaling_group" "asg-servers" {
 resource "aws_autoscaling_schedule" "scale_out_during_business_hours" {
   count = var.enable_autoscaling ? 1 : 0
 
-  scheduled_action_name = "${var.cluster_name}-scale-out-during-business-hours"
-  min_size              = 2
-  max_size              = 10
-  desired_capacity      = 10
-  recurrence            = "0 9 * * *"
-
+  scheduled_action_name  = "${var.cluster_name}-scale-out-during-business-hours"
+  min_size               = 2
+  max_size               = 10
+  desired_capacity       = 10
+  recurrence             = "0 9 * * *"
   autoscaling_group_name = aws_autoscaling_group.asg-servers.name
 }
 
 resource "aws_autoscaling_schedule" "scale_in_at_night" {
   count = var.enable_autoscaling ? 1 : 0
 
-  scheduled_action_name = "${var.cluster_name}-scale-in-at-night"
-  min_size              = 2
-  max_size              = 10
-  desired_capacity      = 2
-  recurrence            = "0 17 * * *"
-
+  scheduled_action_name  = "${var.cluster_name}-scale-in-at-night"
+  min_size               = 2
+  max_size               = 10
+  desired_capacity       = 2
+  recurrence             = "0 17 * * *"
   autoscaling_group_name = aws_autoscaling_group.asg-servers.name
 }
 
@@ -137,4 +130,9 @@ resource "aws_cloudwatch_metric_alarm" "low_cpu_credit_balance" {
   statistic           = "Minimum"
   threshold           = 10
   unit                = "Count"
+}
+
+locals {
+  tcp_protocol = "tcp"
+  all_ips      = ["0.0.0.0/0"]
 }
