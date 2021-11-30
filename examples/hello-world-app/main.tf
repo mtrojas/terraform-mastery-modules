@@ -38,3 +38,11 @@ module "hello_world_app" {
     Environment = "example"
   }
 }
+
+module "mysql" {
+  source = "../../data-stores/mysql"
+
+  db_name     = var.db_name
+  db_username = var.db_username
+  db_password = var.db_password
+}
