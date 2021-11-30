@@ -24,8 +24,7 @@ module "hello_world_app" {
   server_text = "My Example Deployment v0.0.1 of Hello World App"
   environment = "example"
 
-  db_remote_state_bucket = "terraform-mastery-remote-backend"
-  db_remote_state_key    = "modules/examples/mysql/terraform.tfstate"
+  mysql_config = var.mysql_config
 
   instance_type      = "t2.micro"
   min_size           = 2
@@ -39,10 +38,10 @@ module "hello_world_app" {
   }
 }
 
-module "mysql" {
-  source = "../../data-stores/mysql"
+# module "mysql" {
+#   source = "../../data-stores/mysql"
 
-  db_name     = var.db_name
-  db_username = var.db_username
-  db_password = var.db_password
-}
+#   db_name     = var.db_name
+#   db_username = var.db_username
+#   db_password = var.db_password
+# }
