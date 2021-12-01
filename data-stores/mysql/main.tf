@@ -1,6 +1,6 @@
 terraform {
-  # Require Terraform at exactly version 1.0.9
-  required_version = "= 1.0.9"
+  # Allow any 1.x Terraform version
+  required_version = "~> 1.0"
 }
 
 resource "aws_db_instance" "db" {
