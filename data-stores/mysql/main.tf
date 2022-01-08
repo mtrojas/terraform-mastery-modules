@@ -11,8 +11,6 @@ terraform {
   required_version = "~> 1.0"
 }
 
-provider "aws" {}
-
 resource "aws_db_instance" "db" {
   identifier_prefix = "db-server"
   engine            = "mysql"

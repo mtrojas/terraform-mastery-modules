@@ -11,8 +11,6 @@ terraform {
   required_version = "~> 1.0"
 }
 
-provider "aws" {}
-
 module "asg" {
   source = "../../cluster/asg-rolling-deploy"
 
