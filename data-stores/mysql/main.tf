@@ -1,7 +1,17 @@
 terraform {
+  required_providers {
+    # Allow any 3.x version of the AWS provider
+    aws = {
+      version = "~> 3.0"
+    }
+  }
+
+  backend "s3" {}
   # Allow any 1.x Terraform version
   required_version = "~> 1.0"
 }
+
+provider "aws" {}
 
 resource "aws_db_instance" "db" {
   identifier_prefix = "db-server"
